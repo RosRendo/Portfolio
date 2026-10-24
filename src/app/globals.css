@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+:root {
+  --bg-canvas: #090a0f;
+  --bg-surface: #11131c;
+  --bg-surface-elevated: #171a26;
+  --bg-surface-hover: #1d2130;
+  
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-active: rgba(99, 102, 241, 0.4);
+  --border-highlight: rgba(255, 255, 255, 0.12);
+  
+  --text-primary: #f5f5f7;
+  --text-secondary: #9ea3b5;
+  --text-muted: #5e6478;
+  
+  --accent-indigo: #6366f1;
+  --accent-violet: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --accent-emerald: #10b981;
+  
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  selection-background-color: rgba(99, 102, 241, 0.3);
+  selection-color: #ffffff;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: #ffffff;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 11, 16, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Tactile Card specular border & lighting effect */
+.card-specular {
+  position: relative;
+  background: linear-gradient(180deg, rgba(23, 26, 38, 0.95) 0%, rgba(17, 19, 28, 0.98) 100%);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 10px 24px -6px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-specular:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 20px 32px -8px rgba(0, 0, 0, 0.6),
+    0 0 24px -4px rgba(99, 102, 241, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* Dot grid background texture */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+}
+
+/* Ambient glow orb (pure GPU radial-gradient, 0 convolution blur overhead) */
+.ambient-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+/* Focus outline for accessibility */
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent-indigo);
+  outline-offset: 2px;
+}
