@@ -105,11 +105,13 @@ export function PortfolioCanvas({
     sound.playOpen();
     if (card.type === "projects" || card.id === "projects") {
       router.push("/projects");
+    } else if (card.type === "architecture" || card.id === "architecture") {
+      router.push("/architecture");
+    } else if (card.type === "journey" || card.id === "journey") {
+      router.push("/journey");
     } else if (card.type === "project" && card.project) {
       router.push(`/projects/${card.project.slug}`);
     } else if (card.type === "about" || card.id === "about") {
-      router.push("/about");
-    } else if (card.type === "journey" || card.id === "journey") {
       router.push("/about");
     } else if (card.type === "skills" || card.id === "skills") {
       router.push("/skills");
@@ -161,7 +163,7 @@ export function PortfolioCanvas({
         </div>
 
         {/* Top-Right: Minimal Navigation & Controls (Direct Links to Dedicated Pages) */}
-        <nav className="pointer-events-auto flex items-center gap-3 sm:gap-6 text-xs sm:text-sm font-sans tracking-wide">
+        <nav className="pointer-events-auto flex items-center gap-3 sm:gap-5 text-xs sm:text-sm font-sans tracking-wide">
           <Link
             href="/projects"
             onClick={() => sound.playOpen()}
@@ -172,19 +174,35 @@ export function PortfolioCanvas({
           </Link>
 
           <Link
-            href="/about"
+            href="/architecture"
             onClick={() => sound.playOpen()}
-            className="text-zinc-300 hover:text-white transition-colors font-medium"
+            className="text-zinc-300 hover:text-white transition-colors font-medium hidden sm:inline"
           >
-            About
+            Architecture
           </Link>
 
           <Link
             href="/skills"
             onClick={() => sound.playOpen()}
-            className="text-zinc-300 hover:text-white transition-colors font-medium hidden sm:inline"
+            className="text-zinc-300 hover:text-white transition-colors font-medium hidden md:inline"
           >
             Stack
+          </Link>
+
+          <Link
+            href="/journey"
+            onClick={() => sound.playOpen()}
+            className="text-zinc-300 hover:text-white transition-colors font-medium hidden sm:inline"
+          >
+            Journey
+          </Link>
+
+          <Link
+            href="/about"
+            onClick={() => sound.playOpen()}
+            className="text-zinc-300 hover:text-white transition-colors font-medium"
+          >
+            About
           </Link>
 
           <Link

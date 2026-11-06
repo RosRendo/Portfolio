@@ -16,30 +16,28 @@
 <a href="https://portfolio-gold-phi-31.vercel.app/">
   <img src="https://img.shields.io/badge/Live_Portfolio-06b6d4?style=for-the-badge&logo=vercel&logoColor=black" alt="Portfolio" />
 </a>
-<a href="https://linkedin.com/in/YOUR_LINKEDIN">
+<a href="https://github.com/RosRendo">
+  <img src="https://img.shields.io/badge/GitHub-RosRendo-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+</a>
+<a href="https://linkedin.com/in/rosrendo">
   <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
 </a>
-<a href="mailto:YOUR_EMAIL@gmail.com">
+<a href="mailto:rosrendo.dev@gmail.com">
   <img src="https://img.shields.io/badge/Contact_Me-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
-</a>
-<a href="https://discord.gg/YOUR_DISCORD">
-  <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" />
 </a>
 
 <br/><br/>
 
 <div align="center">
-    <a href="https://github.com/ROS-RENDO"> 
-      <img src="https://raw.githubusercontent.com/walidbosso/walidbosso/main/images/city.gif" width="60%" />   
-    </a>
+  <a href="https://github.com/RosRendo"> 
+    <img src="https://raw.githubusercontent.com/walidbosso/walidbosso/main/images/city.gif" width="60%" />   
+  </a>
 
+  <br/><br/>
   <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight" width="600" />
 </div>
 
-[![KnlnKS's LeetCode stats](https://leetcode-stats-six.vercel.app/api?username=madushandhanushka)](https://github.com/madushadhanushka/github-readme)
-
----
-
+<br/>
 
 ---
 
@@ -63,7 +61,7 @@
       </ul>
       <p align="center">
         <b><a href="https://portfolio-gold-phi-31.vercel.app/#projects">🔗 Live Demo</a></b> • 
-        <b><a href="https://github.com/ROS-RENDO">📂 Repository</a></b>
+        <b><a href="https://github.com/RosRendo/ServiceFinder">📂 Repository</a></b>
       </p>
     </td>
     <td width="50%">
@@ -81,7 +79,7 @@
       </ul>
       <p align="center">
         <b><a href="https://portfolio-gold-phi-31.vercel.app/#projects">🔗 Live Demo</a></b> • 
-        <b><a href="https://github.com/ROS-RENDO">📂 Repository</a></b>
+        <b><a href="https://github.com/RosRendo/JAVIS">📂 Repository</a></b>
       </p>
     </td>
   </tr>
@@ -101,7 +99,7 @@
       </ul>
       <p align="center">
         <b><a href="https://portfolio-gold-phi-31.vercel.app/#projects">🔗 Live Demo</a></b> • 
-        <b><a href="https://github.com/ROS-RENDO">📂 Repository</a></b>
+        <b><a href="https://github.com/RosRendo">📂 Repository</a></b>
       </p>
     </td>
     <td width="50%">
@@ -118,22 +116,18 @@
       </ul>
       <p align="center">
         <b><a href="https://portfolio-gold-phi-31.vercel.app/#surprise">🔗 Live Demo</a></b> • 
-        <b><a href="https://github.com/ROS-RENDO">📂 Repository</a></b>
+        <b><a href="https://github.com/RosRendo/Portfolio">📂 Repository</a></b>
       </p>
     </td>
   </tr>
 </table>
 
-<p>
-<a href="https://github.com/walidbosso">
+<div align="center">
+  <a href="https://github.com/RosRendo">
+    <img src="https://github-readme-stats.vercel.app/api?username=RosRendo&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117" alt="RosRendo GitHub Stats" />
+  </a>
+</div>
 
- <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/walidbosso/walidbosso/pacman/pacman-contribution-graph-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/walidbosso/walidbosso/pcman/pacman-contribution-graph.svg">
-  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/walidbosso/walidbosso/pacman/pacman-contribution-graph.svg">
-</picture>
- </a>
-</p>
 ---
 
 ## 🛠️ Complete Technical Arsenal
@@ -156,7 +150,6 @@
     <img src="https://skillicons.dev/icons?i=go,c,php&theme=dark" />
   </a>
 </p>
-
 
 </details>
 
@@ -267,10 +260,6 @@
 
 </details>
 
-
-
-
-
 ---
 
 ## 📊 Live Metrics & Telemetry
@@ -279,29 +268,28 @@
   <tr border="0">
     <td align="center" width="510">
       <!--🔝 Rank GitHub Appearance-->
-      <img src="https://gh-readme-profile.vercel.app/api?username=ROS-RENDO&theme=github_dark_tritanopia&border_width=0.1&photo_quality=100&format=svg&hide_issues&border_radius=17.5&hide_border=true&stroke_color=1F6FEB&bg_color=0D1117" />
+      <img src="https://gh-readme-profile.vercel.app/api?username=RosRendo&theme=github_dark_tritanopia&border_width=0.1&photo_quality=100&format=svg&hide_issues&border_radius=17.5&hide_border=true&stroke_color=1F6FEB&bg_color=0D1117" />
       <br/>
       <!--📏LINE-->
       <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" />
       <br/>
       <!--🏆 GitHub Streak-->
-      <img alt="Mark streak" src="https://streak-stats.demolab.com/?user=ROS-RENDO&theme=github-dark-blue&hide_border=true" />
+      <img alt="Mark streak" src="https://streak-stats.demolab.com/?user=RosRendo&theme=github-dark-blue&hide_border=true" />
     </td>
     <td align="center" width="510">
       <!--📙 Languages-->
-      <img align="center" src="https://github-readme-stats-fast.vercel.app/api/top-langs/?username=ROS-RENDO&theme=github_dark&hide_border=true&no-bg=true&no-frame=true&langs_count=8" />
+      <img align="center" src="https://github-readme-stats-fast.vercel.app/api/top-langs/?username=RosRendo&theme=github_dark&hide_border=true&no-bg=true&no-frame=true&langs_count=8" />
     </td>
   </tr>
 </table>
-
-
-
 
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:06b6d4,50:3b82f6,100:06b6d4&height=100&section=footer" width="100%" />
 </div>
 
-<a href="https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2FROS-RENDO"><img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FROS-RENDO&countColor=%23263759" /></a>
+<div align="center">
+  <a href="https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2FRosRendo"><img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FRosRendo&countColor=%23263759" /></a>
+</div>
 
 <div align="center">
   <sub>🌐 Engineered by <a href="https://portfolio-gold-phi-31.vercel.app/">Ros Rendo</a> • Built with Modern System Architecture</sub>

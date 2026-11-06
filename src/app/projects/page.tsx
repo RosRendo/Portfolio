@@ -4,7 +4,7 @@ import { HorizontalProjectsCanvas } from "@/components/projects/HorizontalProjec
 export const metadata: Metadata = {
   title: "Projects Showcase — ROS RENDO",
   description:
-    "Explore 10 full-stack engineering architectures and production deployments: ServiceFinder, EscrowDeal, TechTune Healer, Journex, Cloud Orchestrator, RendoOS, StackGen, Luxury E-Commerce, JAVIS Voice AI, and Real Estate OS engineered by ROS RENDO.",
+    "Explore 13 full-stack engineering architectures, microservices, deterministic state machines, and production deployments engineered by ROS RENDO.",
 };
 
 export default function ProjectsPage() {

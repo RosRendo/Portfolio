@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PortfolioCanvas } from "@/components/portfolio/PortfolioCanvas";
+import { SkillsDedicatedPage } from "@/components/skills/SkillsDedicatedPage";
 
 export const metadata: Metadata = {
   title: "Technical Stack & Architecture — ROS RENDO",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function SkillsPage() {
-  return <PortfolioCanvas initialView="skills" />;
+  return <SkillsDedicatedPage />;
 }

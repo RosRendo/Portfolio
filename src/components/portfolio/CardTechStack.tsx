@@ -3,18 +3,19 @@
 import { motion } from "framer-motion";
 import { sound } from "@/lib/sound";
 import { skillGroups } from "@/data/skills";
-import { ArrowUpRight, Cpu, Database, LayoutGrid, Terminal } from "lucide-react";
+import { ArrowUpRight, Cpu, Database, LayoutGrid, Terminal, Wrench } from "lucide-react";
 
 interface CardTechStackProps {
   onOpen: () => void;
 }
 
 export function CardTechStack({ onOpen }: CardTechStackProps) {
-  const icons = {
+  const icons: Record<string, typeof Terminal> = {
     backend: Terminal,
     database: Database,
     frontend: LayoutGrid,
     infrastructure: Cpu,
+    tools: Wrench,
   };
 
   return (

@@ -10,6 +10,7 @@ import {
   LayoutGrid,
   Sparkles,
   Terminal,
+  Wrench,
 } from "lucide-react";
 
 interface SkillsDetailViewProps {
@@ -18,11 +19,12 @@ interface SkillsDetailViewProps {
 }
 
 export function SkillsDetailView({ onClose, onSelectProject }: SkillsDetailViewProps) {
-  const groupIcons = {
+  const groupIcons: Record<string, typeof Terminal> = {
     backend: Terminal,
     database: Database,
     frontend: LayoutGrid,
     infrastructure: Cpu,
+    tools: Wrench,
   };
 
   return (

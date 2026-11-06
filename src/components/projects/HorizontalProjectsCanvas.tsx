@@ -247,51 +247,85 @@ export function HorizontalProjectsCanvas({
 
   // Dragging gesture tracking & drag vs click discrimination
   const dragMoved = useRef(false);
+  const startY = useRef(0);
+  const isPointerCaptured = useRef(false);
 
   const handlePointerDown = (e: React.PointerEvent) => {
     if (e.button !== 0) return;
+
+    // If clicking on a button or header/footer control, don't drag
+    const target = e.target as HTMLElement | null;
+    if (target?.closest("button, header, footer")) {
+      return;
+    }
+
     setAutoDrift(false);
     setHasScrolled(true);
     isDragging.current = true;
     dragMoved.current = false;
+    isPointerCaptured.current = false;
     startX.current = e.clientX;
+    startY.current = e.clientY;
     startScroll.current = targetPos.current;
     velocity.current = 0;
-    try {
-      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    } catch {}
+    // NOTE: DO NOT call setPointerCapture here!
+    // Calling setPointerCapture on pointerdown traps the pointer and cancels child click events.
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
     if (!isDragging.current) return;
     const dx = e.clientX - startX.current;
-    if (Math.abs(dx) > 6) {
+    const dy = e.clientY - startY.current;
+    const distance = Math.hypot(dx, dy);
+
+    // Only initiate dragging once moved past 12px threshold
+    if (distance > 12) {
       dragMoved.current = true;
+      if (!isPointerCaptured.current) {
+        isPointerCaptured.current = true;
+        try {
+          (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+        } catch {}
+      }
+      velocity.current = dx;
+      scrollDirectionRef.current = dx <= 0 ? "forward" : "backward";
+      targetPos.current = Math.max(0, Math.min(maxScroll, startScroll.current - dx * 1.5));
     }
-    velocity.current = dx;
-    scrollDirectionRef.current = dx <= 0 ? "forward" : "backward";
-    targetPos.current = Math.max(0, Math.min(maxScroll, startScroll.current - dx * 1.5));
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
     if (!isDragging.current) return;
     isDragging.current = false;
-    try {
-      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-    } catch {}
-    targetPos.current = Math.max(
-      0,
-      Math.min(maxScroll, targetPos.current - velocity.current * 3.5)
-    );
-    // Allow click event to finish before resetting dragMoved
-    setTimeout(() => {
+
+    if (isPointerCaptured.current) {
+      isPointerCaptured.current = false;
+      try {
+        (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+      } catch {}
+      targetPos.current = Math.max(
+        0,
+        Math.min(maxScroll, targetPos.current - velocity.current * 3.5)
+      );
+    }
+
+    // If mouse barely moved (<= 12px), it's a deliberate click
+    const dx = e.clientX - startX.current;
+    const dy = e.clientY - startY.current;
+    if (Math.hypot(dx, dy) <= 12) {
       dragMoved.current = false;
-    }, 100);
+    } else {
+      setTimeout(() => {
+        dragMoved.current = false;
+      }, 50);
+    }
   };
 
   // Dedicated page navigation handler when card is clicked (not dragged)
-  const handleCardClick = (slug: string) => {
-    if (dragMoved.current) return;
+  const handleCardClick = (slug: string, e: React.MouseEvent) => {
+    if (dragMoved.current) {
+      e.preventDefault();
+      return;
+    }
     sound.playOpen();
     router.push(`/projects/${slug}`);
   };
@@ -660,13 +694,7 @@ export function HorizontalProjectsCanvas({
               {/* Card Container with Precision Corner Crosshairs (Direct Link to New Page) */}
               <Link
                 href={`/projects/${project.slug}`}
-                onClick={(e) => {
-                  if (dragMoved.current) {
-                    e.preventDefault();
-                    return;
-                  }
-                  sound.playOpen();
-                }}
+                onClick={(e) => handleCardClick(project.slug, e)}
                 className="group relative rounded-2xl cursor-pointer transition-all duration-300 hover:-translate-y-2 block"
               >
                 {/* 1. Card Body (Solid, crisp container with zero expensive clip-path rasterization) */}
@@ -766,13 +794,7 @@ export function HorizontalProjectsCanvas({
               {/* Title & Technical Metadata Row Below Card (Also direct Link to New Page) */}
               <Link
                 href={`/projects/${project.slug}`}
-                onClick={(e) => {
-                  if (dragMoved.current) {
-                    e.preventDefault();
-                    return;
-                  }
-                  sound.playOpen();
-                }}
+                onClick={(e) => handleCardClick(project.slug, e)}
                 className="mt-3.5 px-1 cursor-pointer group block"
               >
                 <div className="flex items-center justify-between">

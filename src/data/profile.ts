@@ -183,11 +183,11 @@ export const profileData: ProfileData = {
     location: "Phnom Penh, Cambodia (UTC+7 / Remote)",
   },
   contact: {
-    email: "rosrendo.dev@gmail.com",
+    email: "rousrendo@gmail.com",
     github: "https://github.com/rosrendo",
     githubUser: "rosrendo",
-    linkedin: "https://linkedin.com/in/rosrendo",
-    linkedinUser: "rosrendo",
+    linkedin: "https://www.linkedin.com/in/rous-rendo-17b810449/",
+    linkedinUser: "rous-rendo-17b810449",
     cvUrl: "/ROS_RENDO_CV.pdf",
   },
   bio: {

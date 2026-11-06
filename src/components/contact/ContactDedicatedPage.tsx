@@ -135,7 +135,7 @@ export function ContactDedicatedPage() {
             </span>
             <span className="text-zinc-600 hidden sm:inline">•</span>
             <span className="text-xs font-mono text-zinc-400 hidden sm:inline">
-              CARD 08 // LET&apos;S CONNECT
+              PORTAL 06 // LET&apos;S CONNECT
             </span>
           </motion.div>
 

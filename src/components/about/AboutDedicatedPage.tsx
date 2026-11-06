@@ -455,7 +455,7 @@ export function AboutDedicatedPage() {
               className="hover:text-white transition-colors flex items-center gap-2"
             >
               <Compass className="w-3.5 h-3.5 text-cyan-400" />
-              <span>VIEW ALL 10 ENGINEERING CASE STUDIES</span>
+              <span>VIEW ALL 13 ENGINEERING CASE STUDIES</span>
             </Link>
 
             <span>ROS RENDO • PHNOM PENH, CAMBODIA</span>

@@ -1,3 +1,20 @@
+import {
+  DatabaseField,
+  DatabaseEntity,
+  ProjectDatabase,
+  ApiEndpoint,
+  SecurityMatrixItem,
+  projectTechnicalSpecs,
+} from "./projectDetailsDatabase";
+
+export type {
+  DatabaseField,
+  DatabaseEntity,
+  ProjectDatabase,
+  ApiEndpoint,
+  SecurityMatrixItem,
+};
+
 export interface TechCategory {
   category: string;
   items: string[];
@@ -6,6 +23,13 @@ export interface TechCategory {
 export interface ProjectMetric {
   label: string;
   value: string;
+}
+
+export interface ArchitectureComponent {
+  name: string;
+  role: string;
+  tech: string;
+  details?: string;
 }
 
 export interface Project {
@@ -26,16 +50,29 @@ export interface Project {
   architecture: {
     overview: string;
     diagramSteps: string[];
-    components: { name: string; role: string; tech: string }[];
+    components: ArchitectureComponent[];
+    tierDetails?: {
+      client?: string;
+      gateway?: string;
+      services?: string;
+      database?: string;
+      cache?: string;
+      external?: string;
+    };
   };
+  database?: ProjectDatabase;
+  apiEndpoints?: ApiEndpoint[];
+  securityMatrix?: SecurityMatrixItem[];
   techStack: TechCategory[];
   challenges: {
     challenge: string;
     solution: string;
+    impact?: string;
   }[];
   decisions: {
     title: string;
     reasoning: string;
+    alternative?: string;
   }[];
   metrics: ProjectMetric[];
   links: {
