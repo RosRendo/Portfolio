@@ -1,11 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import { useMemo } from "react";
 import { Project } from "@/data/projects";
-import { sound } from "@/lib/sound";
+import { SectionHeader } from "@/components/case-study/SectionHeader";
 import {
-  User,
   Search,
   CalendarCheck,
   Building2,
@@ -28,478 +26,160 @@ import {
 
 interface ProductExperienceFlowProps {
   project: Project;
+  accent: string;
 }
 
-export function ProductExperienceFlow({ project }: ProductExperienceFlowProps) {
-  const [activeStep, setActiveStep] = useState<number>(0);
-
-  // Dynamic workflow resolver tailored to each project's unique domain
+export function ProductExperienceFlow({ project, accent }: ProductExperienceFlowProps) {
   const steps = useMemo(() => {
     const slug = (project.slug || project.id).toLowerCase();
 
     if (slug.includes("service")) {
       return [
-        {
-          stage: "01",
-          actor: "Customer",
-          action: "Chooses a service",
-          desc: "Selects verified home repair, cleaning, or electrical services with upfront hourly rates.",
-          icon: Search,
-        },
-        {
-          stage: "02",
-          actor: "Booking Engine",
-          action: "Creates booking",
-          desc: "Specifies date, property location, and specific job requirements; places reservation hold.",
-          icon: CalendarCheck,
-        },
-        {
-          stage: "03",
-          actor: "Company Portal",
-          action: "Receives request",
-          desc: "Contracting business dashboard receives live notification with customer details and budget.",
-          icon: Building2,
-        },
-        {
-          stage: "04",
-          actor: "Dispatch System",
-          action: "Staff dispatched",
-          desc: "Optimal field technician is assigned and routed using real-time geolocation matching.",
-          icon: Truck,
-        },
-        {
-          stage: "05",
-          actor: "Fulfillment",
-          action: "Service completed",
-          desc: "Job completed, customer verifies work, and payment settles atomically via escrow ledger.",
-          icon: CheckCircle2,
-        },
+        { stage: "01", actor: "Customer", action: "Chooses a service", desc: "Selects verified home repair, cleaning, or electrical services with upfront hourly rates.", icon: Search },
+        { stage: "02", actor: "Booking engine", action: "Creates booking", desc: "Specifies date, property location, and job requirements; places a reservation hold.", icon: CalendarCheck },
+        { stage: "03", actor: "Company portal", action: "Receives request", desc: "Contractor dashboard receives a live notification with customer details and budget.", icon: Building2 },
+        { stage: "04", actor: "Dispatch system", action: "Assigns staff", desc: "Optimal field technician is assigned and routed using geolocation matching.", icon: Truck },
+        { stage: "05", actor: "Fulfillment", action: "Settles payment", desc: "Job completed, customer verifies work, and payment settles via the escrow ledger.", icon: CheckCircle2 },
       ];
     }
 
     if (slug.includes("safe") || slug.includes("deal") || slug.includes("escrow")) {
       return [
-        {
-          stage: "01",
-          actor: "Buyer & Seller",
-          action: "Agrees on Terms",
-          desc: "Parties define trade scope, milestone deliverables, and inspection duration.",
-          icon: FileCheck,
-        },
-        {
-          stage: "02",
-          actor: "Escrow Ledger",
-          action: "Funds Locked",
-          desc: "Buyer deposits payment into immutable escrow smart-ledger with cryptographic hold.",
-          icon: Lock,
-        },
-        {
-          stage: "03",
-          actor: "Seller",
-          action: "Delivers Asset",
-          desc: "Seller uploads verified credentials, source files, or tracks physical shipment.",
-          icon: Truck,
-        },
-        {
-          stage: "04",
-          actor: "Buyer Inspection",
-          action: "48h Review Window",
-          desc: "Buyer tests deliverables within automated countdown with dispute arbitration safety.",
-          icon: AlertCircle,
-        },
-        {
-          stage: "05",
-          actor: "Settlement",
-          action: "Payout Released",
-          desc: "Funds auto-release to seller balance with complete zero double-spend ledger audit.",
-          icon: CheckCircle2,
-        },
+        { stage: "01", actor: "Buyer & seller", action: "Agree on terms", desc: "Parties define trade scope, milestone deliverables, and inspection duration.", icon: FileCheck },
+        { stage: "02", actor: "Escrow ledger", action: "Locks funds", desc: "Buyer deposits payment into an escrow ledger with a cryptographic hold.", icon: Lock },
+        { stage: "03", actor: "Seller", action: "Delivers asset", desc: "Seller uploads verified deliverables, source files, or a physical shipment.", icon: Truck },
+        { stage: "04", actor: "Buyer inspection", action: "Reviews in 48h", desc: "Buyer tests deliverables within an automated countdown window.", icon: AlertCircle },
+        { stage: "05", actor: "Settlement", action: "Releases payout", desc: "Funds auto-release to the seller balance with a full double-spend audit.", icon: CheckCircle2 },
       ];
     }
 
     if (slug.includes("stay") || slug.includes("pilot") || slug.includes("hotel")) {
       return [
-        {
-          stage: "01",
-          actor: "Guest",
-          action: "Selects Room & Dates",
-          desc: "Searches room availability, views amenities, and receives transparent rate totals.",
-          icon: Search,
-        },
-        {
-          stage: "02",
-          actor: "Pessimistic Lock",
-          action: "Inventory Reserved",
-          desc: "Database locks room allocation (SELECT FOR UPDATE) to eliminate overbooking risks.",
-          icon: Lock,
-        },
-        {
-          stage: "03",
-          actor: "Payment Engine",
-          action: "Folio Created",
-          desc: "Stripe/KHQR charge verified, billing ledger created, and confirmation dispatched.",
-          icon: CreditCard,
-        },
-        {
-          stage: "04",
-          actor: "Front Desk",
-          action: "Digital Check-In",
-          desc: "Room moved to occupied status; housekeeping queue automatically scheduled.",
-          icon: Building2,
-        },
-        {
-          stage: "05",
-          actor: "Checkout",
-          action: "Folio Settled",
-          desc: "Incidentals billed, room released for cleaning, and customer invoice generated.",
-          icon: CheckCircle2,
-        },
+        { stage: "01", actor: "Guest", action: "Selects room & dates", desc: "Searches availability, views amenities, and receives transparent rate totals.", icon: Search },
+        { stage: "02", actor: "Reservation", action: "Locks inventory", desc: "Database locks room allocation (SELECT FOR UPDATE) to prevent overbooking.", icon: Lock },
+        { stage: "03", actor: "Payment engine", action: "Creates folio", desc: "Charge verified, billing ledger created, and confirmation dispatched.", icon: CreditCard },
+        { stage: "04", actor: "Front desk", action: "Check-in", desc: "Room moves to occupied status; housekeeping queue is scheduled.", icon: Building2 },
+        { stage: "05", actor: "Checkout", action: "Settles folio", desc: "Incidentals billed, room released for cleaning, invoice generated.", icon: CheckCircle2 },
       ];
     }
 
     if (slug.includes("menu") || slug.includes("tok") || slug.includes("restaurant") || slug.includes("qr")) {
       return [
-        {
-          stage: "01",
-          actor: "Diner",
-          action: "Scans Table QR",
-          desc: "Opens instant contactless menu directly on mobile browser without app installation.",
-          icon: QrCode,
-        },
-        {
-          stage: "02",
-          actor: "Customer",
-          action: "Customizes Items",
-          desc: "Selects dishes, adds modifier options, dietary notes, and views live total bill.",
-          icon: UtensilsCrossed,
-        },
-        {
-          stage: "03",
-          actor: "Order Router",
-          action: "Submits to Kitchen",
-          desc: "WebSocket connection pushes order ticket instantly to Kitchen Display System (KDS).",
-          icon: Activity,
-        },
-        {
-          stage: "04",
-          actor: "Kitchen Staff",
-          action: "Prepares Meal",
-          desc: "Kitchen marks items preparing; diner receives live progress updates at table.",
-          icon: Building2,
-        },
-        {
-          stage: "05",
-          actor: "Settlement",
-          action: "Bill Paid & Closed",
-          desc: "Customer pays via ABA KHQR or cash; table status automatically resets for next guest.",
-          icon: CheckCircle2,
-        },
+        { stage: "01", actor: "Diner", action: "Scans table QR", desc: "Opens the menu directly in the mobile browser, no app install.", icon: QrCode },
+        { stage: "02", actor: "Customer", action: "Customizes order", desc: "Selects dishes, modifier options, dietary notes, and a live running total.", icon: UtensilsCrossed },
+        { stage: "03", actor: "Order router", action: "Sends to kitchen", desc: "WebSocket pushes the order ticket instantly to the kitchen display.", icon: Activity },
+        { stage: "04", actor: "Kitchen staff", action: "Prepares meal", desc: "Kitchen marks items preparing; the diner sees live progress at the table.", icon: Building2 },
+        { stage: "05", actor: "Settlement", action: "Closes the bill", desc: "Customer pays by KHQR or cash; table automatically resets for the next guest.", icon: CheckCircle2 },
       ];
     }
 
     if (slug.includes("cv") || slug.includes("resume")) {
       return [
-        {
-          stage: "01",
-          actor: "Candidate",
-          action: "Imports Career Data",
-          desc: "Uploads existing resume or connects LinkedIn profile for automatic parsing.",
-          icon: FileText,
-        },
-        {
-          stage: "02",
-          actor: "AI Parser",
-          action: "Structures Sections",
-          desc: "Extracts experience, education, key metrics, and skills into normalized schema.",
-          icon: Cpu,
-        },
-        {
-          stage: "03",
-          actor: "ATS Analyzer",
-          action: "Scores Against Jobs",
-          desc: "Evaluates keyword density, formatting compliance, and impact verbs.",
-          icon: Sparkles,
-        },
-        {
-          stage: "04",
-          actor: "Editor Engine",
-          action: "Customizes Layout",
-          desc: "Selects typographic styling, color themes, and reorders timeline sections.",
-          icon: Layers,
-        },
-        {
-          stage: "05",
-          actor: "Export",
-          action: "Pixel-Perfect PDF",
-          desc: "Compiles clean, machine-readable PDF vector export ready for job submission.",
-          icon: CheckCircle2,
-        },
+        { stage: "01", actor: "Candidate", action: "Imports career data", desc: "Uploads an existing resume or connects a profile for automatic parsing.", icon: FileText },
+        { stage: "02", actor: "Parser", action: "Structures sections", desc: "Extracts experience, education, metrics, and skills into a normalized schema.", icon: Cpu },
+        { stage: "03", actor: "ATS analyzer", action: "Scores against jobs", desc: "Evaluates keyword density, formatting compliance, and impact verbs.", icon: Sparkles },
+        { stage: "04", actor: "Editor", action: "Customizes layout", desc: "Selects typography, color themes, and reorders timeline sections.", icon: Layers },
+        { stage: "05", actor: "Export", action: "Produces PDF", desc: "Compiles a clean, machine-readable vector PDF ready for job submission.", icon: CheckCircle2 },
       ];
     }
 
     if (slug.includes("estate") || slug.includes("real")) {
       return [
-        {
-          stage: "01",
-          actor: "Buyer / Renter",
-          action: "Searches Geospatial Map",
-          desc: "Filters properties by price, square footage, neighborhood, and bedroom count.",
-          icon: MapPin,
-        },
-        {
-          stage: "02",
-          actor: "Property Viewer",
-          action: "Virtual Tour & Specs",
-          desc: "Browses high-res photography, floor plans, and localized property tax estimates.",
-          icon: Search,
-        },
-        {
-          stage: "03",
-          actor: "Inquiry System",
-          action: "Schedules Private Tour",
-          desc: "Picks appointment slot synchronized directly with listing broker calendar.",
-          icon: CalendarCheck,
-        },
-        {
-          stage: "04",
-          actor: "Broker Portal",
-          action: "Reviews Lead",
-          desc: "Licensed agent receives buyer pre-approval verification and confirmed window.",
-          icon: Building2,
-        },
-        {
-          stage: "05",
-          actor: "Closing Desk",
-          action: "Offer Submitted",
-          desc: "Digital paperwork initiated with secure audit trail for buyer and seller.",
-          icon: CheckCircle2,
-        },
+        { stage: "01", actor: "Buyer / renter", action: "Searches the map", desc: "Filters properties by price, square footage, neighborhood, and bedrooms.", icon: MapPin },
+        { stage: "02", actor: "Property viewer", action: "Reviews specs", desc: "Browses photography, floor plans, and localized property tax estimates.", icon: Search },
+        { stage: "03", actor: "Inquiry system", action: "Schedules a tour", desc: "Picks an appointment slot synced with the listing broker's calendar.", icon: CalendarCheck },
+        { stage: "04", actor: "Broker portal", action: "Reviews the lead", desc: "Agent receives pre-approval verification and the confirmed viewing window.", icon: Building2 },
+        { stage: "05", actor: "Closing desk", action: "Submits the offer", desc: "Digital paperwork initiated with a secure audit trail for both parties.", icon: CheckCircle2 },
       ];
     }
 
     if (slug.includes("trading") || slug.includes("journex") || slug.includes("healer") || slug.includes("tune")) {
       return [
-        {
-          stage: "01",
-          actor: "Market / Patient",
-          action: "Live Data Ingestion",
-          desc: "Continuous telemetry stream captured with sub-millisecond timestamps.",
-          icon: Activity,
-        },
-        {
-          stage: "02",
-          actor: "Vector Engine",
-          action: "Indicator Calculation",
-          desc: "Rolling-window algorithms calculate metrics and identify anomaly patterns.",
-          icon: TrendingUp,
-        },
-        {
-          stage: "03",
-          actor: "Risk Matrix",
-          action: "Threshold Guard",
-          desc: "Real-time safety checks evaluate drawdown thresholds and vital warnings.",
-          icon: AlertCircle,
-        },
-        {
-          stage: "04",
-          actor: "Execution Bus",
-          action: "Routes Notification",
-          desc: "Instant alert dispatched across WebSocket channels to active operators.",
-          icon: Cpu,
-        },
-        {
-          stage: "05",
-          actor: "Audit Ledger",
-          action: "Journal Committed",
-          desc: "State recorded to persistent storage with complete historical post-mortem.",
-          icon: CheckCircle2,
-        },
+        { stage: "01", actor: "Data feed", action: "Ingests live data", desc: "Continuous telemetry stream captured with millisecond timestamps.", icon: Activity },
+        { stage: "02", actor: "Vector engine", action: "Calculates indicators", desc: "Rolling-window algorithms compute metrics and flag anomaly patterns.", icon: TrendingUp },
+        { stage: "03", actor: "Risk matrix", action: "Checks thresholds", desc: "Safety checks evaluate drawdown thresholds and trigger warnings.", icon: AlertCircle },
+        { stage: "04", actor: "Execution bus", action: "Routes alerts", desc: "Alerts dispatched across WebSocket channels to active operators.", icon: Cpu },
+        { stage: "05", actor: "Audit ledger", action: "Commits journal", desc: "State recorded to persistent storage with a full historical post-mortem.", icon: CheckCircle2 },
       ];
     }
 
-    // Default dynamic workflow from project diagramSteps or keyFeatures
     const stepsFromDiagram = project.architecture.diagramSteps || [];
     if (stepsFromDiagram.length >= 4) {
       return stepsFromDiagram.slice(0, 5).map((step, i) => ({
         stage: `0${i + 1}`,
-        actor: `Phase 0${i + 1}`,
-        action: step.split(".")[0] || `Execution Step ${i + 1}`,
+        actor: `Phase ${i + 1}`,
+        action: step.split(".")[0] || `Execution step ${i + 1}`,
         desc: step,
         icon: [Search, Lock, Building2, Truck, CheckCircle2][i % 5],
       }));
     }
 
     return [
-      {
-        stage: "01",
-        actor: "Client Ingress",
-        action: "Initiates Request",
-        desc: project.problem?.split(".")[0] || "User selects desired tier and parameters through the web interface.",
-        icon: User,
-      },
-      {
-        stage: "02",
-        actor: "Validation Guard",
-        action: "Validates Schema",
-        desc: "Edge gateway confirms identity, limits concurrency, and asserts schema integrity.",
-        icon: Search,
-      },
-      {
-        stage: "03",
-        actor: "Domain Logic",
-        action: "Executes Transaction",
-        desc: project.solution?.split(".")[0] || "Domain controllers lock resources in database with zero double-execution risk.",
-        icon: Building2,
-      },
-      {
-        stage: "04",
-        actor: "Async Pipeline",
-        action: "Dispatches Jobs",
-        desc: "Background workers trigger webhooks, push notifications, and analytics pipelines.",
-        icon: Truck,
-      },
-      {
-        stage: "05",
-        actor: "Settlement",
-        action: "Execution Finalized",
-        desc: "State machine completes with sub-50ms latency and formal audit record.",
-        icon: CheckCircle2,
-      },
+      { stage: "01", actor: "Client", action: "Makes the request", desc: project.problem?.split(".")[0] || "User selects the desired tier and parameters through the interface.", icon: Search },
+      { stage: "02", actor: "Validation", action: "Checks the schema", desc: "The edge gateway confirms identity, limits concurrency, and asserts schema integrity.", icon: Lock },
+      { stage: "03", actor: "Domain logic", action: "Runs the transaction", desc: project.solution?.split(".")[0] || "Domain controllers lock resources to prevent double execution.", icon: Building2 },
+      { stage: "04", actor: "Async pipeline", action: "Dispatches jobs", desc: "Background workers trigger webhooks, notifications, and analytics.", icon: Truck },
+      { stage: "05", actor: "Settlement", action: "Finalizes state", desc: "State machine completes with a formal audit record.", icon: CheckCircle2 },
     ];
   }, [project]);
 
+  const Icon0 = steps[0]?.icon;
+  const actors = Array.from(new Set(steps.map((s) => s.actor)));
+
   return (
-    <div className="w-full space-y-12">
-      {/* Editorial Section Header */}
-      <div className="space-y-4">
-        <span className="text-xs font-mono tracking-widest text-zinc-500 uppercase">
-          02 — PRODUCT EXPERIENCE
-        </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white max-w-2xl">
-          The {project.title} Core Lifecycle
-        </h2>
-        <p className="text-sm sm:text-base text-zinc-400 font-light max-w-xl">
-          How requests and data move through the system from initial user ingress to finalized settlement.
-        </p>
-      </div>
+    <div className="space-y-12">
+      <SectionHeader
+        index="02"
+        title={`How ${project.title} runs, step by step`}
+        description={`Five stages, from first user action to settled state. Actors: ${actors.slice(0, 3).join(", ")}${actors.length > 3 ? ", and more" : ""}.`}
+        accent={accent}
+      />
 
-      {/* Progressive Flow Pipeline */}
-      <div className="relative">
-        {/* Subtle Horizontal Guide Line (Desktop) */}
-        <div className="hidden lg:block absolute top-[52px] left-[5%] right-[5%] h-[1px] bg-white/10 z-0" />
-
-        {/* Dynamic Progress Line */}
-        <div
-          className="hidden lg:block absolute top-[52px] left-[5%] h-[1px] bg-white z-0 transition-all duration-700 ease-out"
-          style={{ width: `${(activeStep / (steps.length - 1)) * 90}%` }}
-        />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-4 relative z-10">
-          {steps.map((step, idx) => {
-            const isCurrent = activeStep === idx;
-            const isPassed = activeStep >= idx;
-            const Icon = step.icon;
-
-            return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-0">
+        {steps.map((step, idx) => {
+          const Icon = step.icon;
+          const isFirst = idx === 0;
+          return (
+            <div
+              key={step.stage}
+              className={`relative font-mono ${isFirst ? "lg:pl-0" : "lg:pl-8"}`}
+            >
               <div
-                key={idx}
-                onMouseEnter={() => {
-                  sound.playHover();
-                  setActiveStep(idx);
-                }}
-                onClick={() => {
-                  sound.playTab();
-                  setActiveStep(idx);
-                }}
-                className={`group cursor-pointer space-y-5 transition-all duration-300 ${
-                  isCurrent
-                    ? "opacity-100 -translate-y-1"
-                    : isPassed
-                    ? "opacity-85 hover:opacity-100"
-                    : "opacity-40 hover:opacity-75"
+                aria-hidden
+                className={`hidden lg:block absolute top-0 border-t border-white/10 ${
+                  isFirst ? "left-7 right-0" : "left-0 right-0 w-full"
                 }`}
-              >
-                {/* Step Indicator Node */}
-                <div className="flex items-center gap-4">
-                  <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 ${
-                      isCurrent
-                        ? "bg-white text-black border-white shadow-[0_0_25px_rgba(255,255,255,0.3)]"
-                        : isPassed
-                        ? "bg-zinc-900 text-white border-white/40"
-                        : "bg-black text-zinc-600 border-white/10 group-hover:border-white/30"
-                    }`}
-                  >
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <span className="text-xs font-mono font-bold text-zinc-500 lg:hidden">
-                    STEP {step.stage}
-                  </span>
+              />
+              <span
+                aria-hidden
+                className="hidden lg:block absolute -top-[3.5px] left-7 w-[6px] h-[6px] rounded-full bg-[#090a0f] border border-white/25"
+              />
+
+              <div className="pt-8 space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-xs text-zinc-500 tabular-nums">{step.stage}</span>
+                  <span className="h-px w-4 bg-white/20" aria-hidden />
+                  <Icon className="w-4 h-4 text-zinc-500" stroke-width="1.5" />
                 </div>
 
-                {/* Step Metadata & Description */}
-                <div className="space-y-1.5 pr-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-mono tracking-wider text-zinc-500 uppercase">
-                      {step.actor}
-                    </span>
-                  </div>
-
-                  <h3
-                    className={`text-base font-bold tracking-tight transition-colors ${
-                      isCurrent ? "text-white" : "text-zinc-300"
-                    }`}
-                  >
-                    {step.action}
-                  </h3>
-
-                  <p className="text-xs text-zinc-400 font-light leading-relaxed">
-                    {step.desc}
-                  </p>
+                <div className="space-y-1.5 pr-6">
+                  <p className="font-mono text-[11px] text-zinc-500">{step.actor}</p>
+                  <h3 className="text-base font-medium text-white not-prose">{step.action}</h3>
+                  <p className="text-xs text-zinc-400 leading-relaxed pr-1 lg:pr-8">{step.desc}</p>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Selected Step Minimal Spotlight Card */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="space-y-1.5 max-w-xl">
-          <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>ACTIVE WORKFLOW STAGE // {steps[activeStep]?.stage || "01"}</span>
-          </div>
-          <h4 className="text-lg sm:text-xl font-bold text-white">
-            {steps[activeStep]?.actor} &rarr; {steps[activeStep]?.action}
-          </h4>
-          <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
-            {steps[activeStep]?.desc}
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            type="button"
-            onClick={() => {
-              sound.playTab();
-              setActiveStep((prev) => (prev > 0 ? prev - 1 : steps.length - 1));
-            }}
-            className="px-4 py-2 rounded-lg text-xs font-mono text-zinc-400 hover:text-white border border-white/10 hover:border-white/30 transition-colors"
-          >
-            PREV
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              sound.playTab();
-              setActiveStep((prev) => (prev + 1) % steps.length);
-            }}
-            className="px-4 py-2 rounded-lg text-xs font-mono bg-white text-black font-semibold hover:bg-zinc-200 transition-colors"
-          >
-            NEXT STAGE
-          </button>
-        </div>
+      <div className="pt-8 border-t border-white/[0.06] font-mono text-zinc-600 flex flex-wrap items-center gap-4">
+        <span className="text-xs tabular-nums">{steps.length} stages</span>
+        <span className="h-4 w-px bg-white/10" aria-hidden />
+        <span className="text-xs flex items-center gap-2">
+          <Icon0 className="w-3.5 h-3.5" stroke-width="1.5" />
+          {steps[0]?.actor} → {steps[steps.length - 1]?.actor}
+        </span>
       </div>
     </div>
   );

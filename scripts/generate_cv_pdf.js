@@ -1,139 +1,68 @@
 const fs = require('fs');
 const path = require('path');
 
-// Simple valid standalone PDF generator without external dependencies
 function generateSimplePDF() {
-  const content = `%PDF-1.4
-1 0 obj
-<<
-  /Type /Catalog
-  /Pages 2 0 R
->>
-endobj
-2 0 obj
-<<
-  /Type /Pages
-  /Kids [3 0 R]
-  /Count 1
->>
-endobj
-3 0 obj
-<<
-  /Type /Page
-  /Parent 2 0 R
-  /Resources <<
-    /Font <<
-      /F1 4 0 R
-      /F2 5 0 R
-    >>
-  >>
-  /MediaBox [0 0 612 792]
-  /Contents 6 0 R
->>
-endobj
-4 0 obj
-<<
-  /Type /Font
-  /Subtype /Type1
-  /BaseFont /Helvetica-Bold
->>
-endobj
-5 0 obj
-<<
-  /Type /Font
-  /Subtype /Type1
-  /BaseFont /Helvetica
->>
-endobj
-6 0 obj
-<<
-  /Length 1200
->>
-stream
-BT
-/F1 22 Tf
-50 730 Td
-(ROS RENDO) Tj
-/F2 12 Tf
-0 -22 Td
-(Full-Stack Developer | Backend Engineering & Systems Architecture) Tj
-0 -16 Td
-(Email: rosrendo.dev@gmail.com  |  Location: Phnom Penh, Cambodia) Tj
-0 -16 Td
-(GitHub: https://github.com/rosrendo  |  Portfolio: https://rosrendo.dev) Tj
-/F1 14 Tf
-0 -30 Td
-(PROFILE & FOCUS) Tj
-/F2 10 Tf
-0 -18 Td
-(Software engineering student and independent product builder focused on developing) Tj
-0 -14 Td
-(full-stack web applications, backend architectures, APIs, databases, and deployable digital products.) Tj
-/F1 14 Tf
-0 -28 Td
-(TECHNICAL CORE COMPETENCIES) Tj
-/F2 10 Tf
-0 -18 Td
-(Frontend: React, Next.js, TypeScript, Tailwind CSS, Framer Motion) Tj
-0 -14 Td
-(Backend: Node.js, Express.js, NestJS, REST APIs, JWT Auth, Microservices) Tj
-0 -14 Td
-(Databases: PostgreSQL, Prisma ORM, MySQL, Redis, Relational Indexing) Tj
-0 -14 Td
-(DevOps & Tools: Docker, Docker Compose, Nginx, Linux Ubuntu, AWS EC2, PM2, Git) Tj
-/F1 14 Tf
-0 -28 Td
-(FEATURED PROJECTS) Tj
-/F1 11 Tf
-0 -18 Td
-(1. ServiceFinder - Multi-Sided Home Services Marketplace) Tj
-/F2 10 Tf
-0 -14 Td
-(Next.js, Node.js, PostgreSQL, Prisma, Docker. Real-time booking schedule engine with double-booking prevention.) Tj
-/F1 11 Tf
-0 -18 Td
-(2. SafeDeal - Digital Marketplace & Escrow Concept) Tj
-/F2 10 Tf
-0 -14 Td
-(Next.js, Express, PostgreSQL, Prisma. Milestone-based escrow protocol with deterministic state machine.) Tj
-/F1 11 Tf
-0 -18 Td
-(3. Trading Tools & Strategy Lab) Tj
-/F2 10 Tf
-0 -14 Td
-(TypeScript, Node.js, SVG/Canvas. Vectorized indicator calculation engine with backtesting performance metrics.) Tj
-/F1 14 Tf
-0 -28 Td
-(EDUCATION & JOURNEY) Tj
-/F2 10 Tf
-0 -18 Td
-(2022 - Present: Software Engineering Student & Independent Builder) Tj
-0 -14 Td
-(Focus on distributed systems, database internals, and end-to-end fullstack development.) Tj
-ET
-endstream
-endobj
-xref
-0 7
-0000000000 65535 f 
-0000000009 00000 n 
-0000000058 00000 n 
-0000000115 00000 n 
-0000000261 00000 n 
-0000000336 00000 n 
-0000000407 00000 n 
-trailer
-<<
-  /Size 7
-  /Root 1 0 R
->>
-startxref
-1700
-%%EOF`;
+  const lines = [
+    ['F1', 22, 'ROS RENDO'],
+    ['F2', 12, 'Full-Stack Developer | Backend Engineering & Systems Architecture', true],
+    ['F2', 12, 'Email: rousrendo@gmail.com  |  Location: Phnom Penh, Cambodia', true],
+    ['F2', 12, 'GitHub: https://github.com/rosrendo  |  Portfolio: https://rosrendo.dev', true],
+    ['br', 30],
+    ['F1', 14, 'PROFILE & FOCUS'],
+    ['F2', 10, 'Software engineering student and independent product builder focused on developing', true],
+    ['F2', 10, 'full-stack web applications, backend architectures, APIs, databases, and deployable digital products.', true],
+    ['br', 28],
+    ['F1', 14, 'TECHNICAL CORE COMPETENCIES'],
+    ['F2', 10, 'Frontend: React, Next.js, TypeScript, Tailwind CSS, Framer Motion', true],
+    ['F2', 10, 'Backend: Node.js, Express.js, NestJS, REST APIs, JWT Auth, Microservices', true],
+    ['F2', 10, 'Databases: PostgreSQL, Prisma ORM, MySQL, Redis, Relational Indexing', true],
+    ['F2', 10, 'DevOps & Tools: Docker, Docker Compose, Nginx, Linux Ubuntu, AWS EC2, PM2, Git', true],
+    ['br', 28],
+    ['F1', 14, 'FEATURED PROJECTS'],
+    ['F1', 11, '1. ServiceFinder - Multi-Sided Home Services Marketplace', true],
+    ['F2', 10, 'Next.js, Node.js, PostgreSQL, Prisma, Docker. Real-time booking schedule engine with double-booking prevention.', true],
+    ['F1', 11, '2. SafeDeal - Digital Marketplace & Escrow Concept', true],
+    ['F2', 10, 'Next.js, Express, PostgreSQL, Prisma. Milestone-based escrow protocol with deterministic state machine.', true],
+    ['F1', 11, '3. Trading Tools & Strategy Lab', true],
+    ['F2', 10, 'TypeScript, Node.js, SVG/Canvas. Vectorized indicator calculation engine with backtesting performance metrics.', true],
+    ['br', 28],
+    ['F1', 14, 'EDUCATION & JOURNEY'],
+    ['F2', 10, '2022 - Present: Software Engineering Student & Independent Builder', true],
+    ['F2', 10, 'Focus on distributed systems, database internals, and end-to-end fullstack development.', true],
+  ];
+
+  let stream = 'BT\n';
+  let y = 730;
+  for (const line of lines) {
+    if (line[0] === 'br') { y -= line[1]; continue; }
+    const font = line[0], size = line[1], text = line[2];
+    stream += `/${font} ${size} Tf\n50 ${y} Td\n(${text.replace(/[\\(]/g, '\\$&')}) Tj\n`;
+    y -= size + 8;
+  }
+  stream += 'ET\n';
+
+  const objects = [];
+  objects[1] = `<< /Type /Catalog /Pages 2 0 R >>`;
+  objects[2] = `<< /Type /Pages /Kids [3 0 R] /Count 1 >>`;
+  objects[3] = `<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /MediaBox [0 0 612 792] /Contents 6 0 R >>`;
+  objects[4] = `<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>`;
+  objects[5] = `<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>`;
+  objects[6] = `<< /Length ${Buffer.byteLength(stream, 'binary')} >>\nstream\n${stream}endstream`;
+
+  let pdf = '%PDF-1.4\n';
+  const offsets = {};
+  for (let i = 1; i <= 6; i++) {
+    offsets[i] = Buffer.byteLength(pdf, 'binary');
+    pdf += `${i} 0 obj\n${objects[i]}\nendobj\n`;
+  }
+  const xrefStart = Buffer.byteLength(pdf, 'binary');
+  let xref = `xref\n0 7\n0000000000 65535 f \n`;
+  for (let i = 1; i <= 6; i++) xref += `${String(offsets[i]).padStart(10, '0')} 00000 n \n`;
+  pdf += xref + `trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF`;
 
   const outputPath = path.join(__dirname, '..', 'public', 'ROS_RENDO_CV.pdf');
-  fs.writeFileSync(outputPath, content);
-  console.log('CV PDF generated successfully at:', outputPath);
+  fs.writeFileSync(outputPath, pdf);
+  console.log('CV PDF generated successfully at:', outputPath, '-', pdf.length, 'bytes');
 }
 
 generateSimplePDF();
