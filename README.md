@@ -91,6 +91,9 @@ flowchart TD
 | **CVGen** | Career Document Engine | React, Tailwind, Reactive Resume Schema, Multi-Page PDF | [Repo](https://github.com/RosRendo/CVGen) |
 | **Formora** | Enterprise Spec Studio | Next.js, NestJS, SQLite WAL, 12-Module Specification Engine | [Repo](https://github.com/RosRendo/Formora) |
 | **Nexus** | Agency Operations CRM | Next.js, NestJS, PostgreSQL, Client Lead Tracking | [Repo](https://github.com/RosRendo/Nexus) |
+| **TechTune Healer** | Automotive & Roadside Assistance | Expo, React Native, Next.js, Express, Socket.io, KHQR | [Repo](https://github.com/RosRendo/TechTuneHealer) |
+| **JARVIS** | Windows Desktop AI Assistant | Python FastAPI, React 19, Ollama, Gemini, Claude, Win32 Automation | [Repo](https://github.com/RosRendo/JAVIS) |
+| **Atelier Privé** | Luxury Monochrome E-Commerce | Next.js 16, React 19, NestJS, PostgreSQL, Prisma 6, Stripe | [Repo](https://github.com/RosRendo/Ecommerce) |
 
 ---
 
